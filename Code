@@ -1,0 +1,49 @@
+#define adc A0
+
+#define rly D5
+
+#define led D0
+
+int a,a_ref,dif;
+
+void setup()
+
+{
+
+Serial.begin(9600);
+
+pinMode(adc,INPUT);
+
+pinMode(rly,OUTPUT);
+
+pinMode(led,OUTPUT);
+
+digitalWrite(rly,LOW);
+
+digitalWrite(led,HIGH);
+
+a_ref=analogRead(adc);
+
+}
+
+void loop()
+
+{
+
+a=analogRead(adc);
+
+dif=a_ref-a;
+
+if( dif>50){digitalWrite(rly,HIGH);digitalWrite(led,LOW);}
+
+else{digitalWrite(rly,LOW);digitalWrite(led,HIGH);}
+
+Serial.print("ref: ");Serial.print(a_ref);
+
+Serial.print(" A:");Serial.print(a);
+
+Serial.print(" D:");Serial.println(dif);
+
+delay(500);
+
+}
